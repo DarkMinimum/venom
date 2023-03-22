@@ -23,7 +23,7 @@ public class PortHubController {
     private static final String RESPONSE_JAVA = "response_j";
     private static final String RESPONSE_PY = "response_p";
 
-    private static final String PORT_CS = "1000";
+    private static final String PORT_CS = "5000";
     private static final String PORT_JAVA = "1001";
     private static final String PORT_PY = "1002";
 
