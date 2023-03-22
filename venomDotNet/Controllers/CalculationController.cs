@@ -1,30 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 using org.matheval;
 
-namespace VenomDotNet.Controllers
+namespace VenomDotNet.Controllers;
+
+[ApiController]
+[Route("")]
+public class CalculationController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class CalculationController : ControllerBase
+    private readonly ILogger<CalculationController> _logger;
+
+    public CalculationController(ILogger<CalculationController> logger)
     {
-        private readonly ILogger<CalculationController> _logger;
+        _logger = logger;
+    }
 
-        public CalculationController(ILogger<CalculationController> logger)
+    [HttpPost]
+    [Consumes("text/plain")]
+    public string Get([FromBody] string stringExpression)
+    {
+        try
         {
-            _logger = logger;
+            return new Expression(stringExpression.Split("=")[1]).Eval().ToString();
         }
-
-        [HttpPost]
-        public string Get([FromBody] string stringExpression)
+        catch (Exception ex)
         {
-            try 
-            {
-                return new Expression(stringExpression).Eval().ToString();
-            }
-            catch (Exception ex)
-            { 
-                return "wrong expression"; 
-            }
+            return "wrong expression";
         }
     }
 }
