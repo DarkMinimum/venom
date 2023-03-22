@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using org.matheval;
 
@@ -18,9 +19,13 @@ public class CalculationController : ControllerBase
     [Consumes("text/plain")]
     public string Get([FromBody] string stringExpression)
     {
+        var sw = new Stopwatch();
+        sw.Start();
         try
         {
-            return new Expression(stringExpression.Split("=")[1]).Eval().ToString();
+            var result = new Expression(stringExpression.Split("=")[1]).Eval().ToString();
+            sw.Stop();
+            return result + " t: " + sw.Elapsed + " ms";
         }
         catch (Exception ex)
         {
