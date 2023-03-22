@@ -1,16 +1,19 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import math
+import urllib.parse
 
 PORT = 1002
 
-# TODO: mapper
 class RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_len = int(self.headers.get('Content-Length'))
-        post_body = self.rfile.read(content_len)
+        post_body = str(self.rfile.read(content_len))
+        raw = post_body.split("=",1)[1];
+        raw = urllib.parse.unquote(raw)
+        ex = raw.replace("'", "");
+        print(ex)
+        result = eval(ex);
 
-        print(post_body)
-        result = eval(post_body);
         print(result)
 
         self.send_response(200)

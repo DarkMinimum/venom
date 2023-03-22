@@ -1,5 +1,7 @@
 package ua.dz.venommath.controllers;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,11 @@ public class VenomController {
     @Autowired
     private MathService service;
 
-    //%2b -> +
     @PostMapping("/")
-    public double calculateExpression(@RequestBody String ex) {
-        Objects.requireNonNull(ex);
+    public double calculateExpression(@RequestBody String rawEx) {
+        Objects.requireNonNull(rawEx);
+        rawEx = (rawEx.substring(rawEx.indexOf("=") + 1).toLowerCase(Locale.ROOT));
+        String ex = java.net.URLDecoder.decode(rawEx, StandardCharsets.UTF_8);
         return service.calculateExpression(ex).orElse(0.0);
     }
 }
