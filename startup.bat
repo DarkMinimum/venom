@@ -3,10 +3,10 @@
 :: 1. start nested services
 
 :: venomCS
-:: ...
+start out/pub/VenomDotNet.exe
 
 :: venomMath
-start java -jar out/artifacts/venom_jar/venom.jar ua.dz.venommath.VenomMathApplication
+start java -jar out/artifacts/venomMath_jar/venomMath.jar ua.dz.venommath.VenomMathApplication
 
 :: venomPy
 start python .\venomPy\main.py

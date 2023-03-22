@@ -40,7 +40,7 @@ public class PortHubController {
         String result = java.net.URLDecoder.decode(ex, StandardCharsets.UTF_8);
 
         model.addAttribute(REQUEST, result);
-//        model.addAttribute(RESPONSE_CS, sendToVenomInstance(result, PORT_CS));
+        model.addAttribute(RESPONSE_CS, sendToVenomInstance(result, PORT_CS));
         model.addAttribute(RESPONSE_JAVA, sendToVenomInstance(result, PORT_JAVA));
         model.addAttribute(RESPONSE_PY, sendToVenomInstance(result, PORT_PY));
         return "index";
