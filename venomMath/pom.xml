@@ -28,10 +28,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
@@ -39,7 +35,6 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.12.0</version>
     </dependency>
-    <!--    Java approach - https://github.com/ezylang/EvalEx -->
     <dependency>
       <groupId>com.ezylang</groupId>
       <artifactId>EvalEx</artifactId>
@@ -52,6 +47,24 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <archive>
+            <!-- Configures the content of the created manifest -->
+            <manifest>
+              <!-- Adds the classpath to the created manifest -->
+              <addClasspath>true</addClasspath>
+              <!-- Specifies that all dependencies of our application are found -->
+              <!-- Configures the main class of the application -->
+              <mainClass>ua.dz.venommath.VenomMathApplication</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+
       </plugin>
     </plugins>
   </build>
