@@ -18,10 +18,15 @@ public class VenomController {
     private MathService service;
 
     @PostMapping("/")
-    public double calculateExpression(@RequestBody String rawEx) {
+    public String calculateExpression(@RequestBody String rawEx) {
         Objects.requireNonNull(rawEx);
         rawEx = (rawEx.substring(rawEx.indexOf("=") + 1).toLowerCase(Locale.ROOT));
         String ex = java.net.URLDecoder.decode(rawEx, StandardCharsets.UTF_8);
-        return service.calculateExpression(ex).orElse(0.0);
+
+        long start = System.currentTimeMillis();
+        var result =  service.calculateExpression(ex).orElse(0.0).toString();
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
+        return result + " t: " + timeElapsed + " ms";
     }
 }

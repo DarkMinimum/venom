@@ -48,7 +48,6 @@ public class PortHubController {
 
     private String sendToVenomInstance(String ex, String port) {
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
@@ -64,6 +63,9 @@ public class PortHubController {
             entity,
             String.class);
 
-        return response.getBody();
+        var body = response.getBody();
+
+        System.out.println("For port " + port + " following body was fetched: " + body);
+        return body;
     }
 }
