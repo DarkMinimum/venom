@@ -21,10 +21,10 @@ public class VenomController {
     public String calculateExpression(@RequestBody String rawEx) {
         Objects.requireNonNull(rawEx);
         rawEx = (rawEx.substring(rawEx.indexOf("=") + 1).toLowerCase(Locale.ROOT));
-        String ex = java.net.URLDecoder.decode(rawEx, StandardCharsets.UTF_8);
+//        String ex = java.net.URLDecoder.decode(rawEx, StandardCharsets.UTF_8);
 
         long start = System.currentTimeMillis();
-        var result =  service.calculateExpression(ex).orElse(0.0).toString();
+        var result =  service.calculateExpression(rawEx).orElse(0.0).toString();
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
         return result + " t: " + timeElapsed + " ms";

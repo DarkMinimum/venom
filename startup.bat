@@ -10,6 +10,5 @@ start java -jar out/artifacts/venomMath_jar/venomMath.jar ua.dz.venommath.VenomM
 
 :: venomPy
 start python .\venomPy\main.py
-
 :: 2. start port Hub
 java -jar out/artifacts/portHub_jar/portHub.jar ua.dz.porthub.PortHubApplication

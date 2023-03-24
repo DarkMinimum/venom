@@ -23,7 +23,7 @@ public class PortHubController {
     private static final String RESPONSE_JAVA = "response_j";
     private static final String RESPONSE_PY = "response_p";
 
-    private static final String PORT_CS = "5000";
+    private static final String PORT_CS = "5287"; //5000
     private static final String PORT_JAVA = "1001";
     private static final String PORT_PY = "1002";
 
@@ -49,13 +49,11 @@ public class PortHubController {
     private String sendToVenomInstance(String ex, String port) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.TEXT_PLAIN);
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port);
-        var map = new LinkedMultiValueMap();
-        map.add("value", ex);
-
-        HttpEntity<?> entity = new HttpEntity(map, headers);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port + "/");
+        var bodyReq = "value=" + ex;
+        HttpEntity<?> entity = new HttpEntity(bodyReq, headers);
 
         HttpEntity<String> response = restTemplate.exchange(
             builder.toUriString(),

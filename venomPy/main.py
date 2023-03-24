@@ -1,10 +1,10 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import math
+from math import sin, cos, tan, asin, acos, atan
 import urllib.parse
 import time
+import re
 
 PORT = 1002
-
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -13,6 +13,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         raw = post_body.split("=", 1)[1];
         raw = urllib.parse.unquote(raw)
         ex = raw.replace("'", "");
+
         print(ex)
         start = time.time()
         result = eval(ex)

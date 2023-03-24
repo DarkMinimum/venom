@@ -19,13 +19,14 @@ public class CalculationController : ControllerBase
     [Consumes("text/plain")]
     public string Get([FromBody] string stringExpression)
     {
-        var sw = new Stopwatch();
-        sw.Start();
         try
         {
-            var result = new Expression(stringExpression.Split("=")[1]).Eval().ToString();
+            var ex = Uri.UnescapeDataString(stringExpression).Split("=")[1];
+            var sw = new Stopwatch();
+            sw.Start();
+            var result = new Expression(ex).Eval().ToString();
             sw.Stop();
-            return result + " t: " + sw.Elapsed + " ms";
+            return result + " t: " + sw.Elapsed.Milliseconds + " ms";
         }
         catch (Exception ex)
         {
